@@ -1,109 +1,146 @@
-[![CodeGuide](/codeguide-backdrop.svg)](https://codeguide.dev)
+# PhotoShare - Community Image Social Network
 
-# CodeGuide Vite + Supabase Starter
+A modern, community-powered image social network built with React and Supabase. Share your photos, discover amazing moments from other photographers, and connect with a creative community.
 
-A modern web application starter template built with Vite and React, featuring a beautiful UI and Supabase integration.
+## Features
+
+- 📸 **Photo Upload & Management** - Upload high-quality photos with titles and descriptions
+- 👥 **User Profiles** - Create customizable profiles to showcase your photography portfolio
+- 🖼️ **Photo Gallery** - Browse a responsive grid layout with infinite scroll and modal views
+- 🔐 **Secure Authentication** - Email/password authentication with session management
+- 💬 **Social Interactions** - Like and comment on photos (UI ready, backend extensible)
+- 📱 **Responsive Design** - Optimized for desktop, tablet, and mobile devices
+- 🔍 **Public & Private Content** - Public viewing with authenticated uploads and profiles
+- ⚡ **Real-time Updates** - Instant photo updates with TanStack Query caching
 
 ## Tech Stack
 
 - **Framework:** [Vite](https://vitejs.dev/) + [React](https://react.dev/)
-- **Database:** [Supabase](https://supabase.com/)
+- **Backend:** [Supabase](https://supabase.com/) (Database, Auth, Storage)
+- **Routing:** [React Router](https://reactrouter.com/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
 - **Data Management:** [TanStack Query](https://tanstack.com/query)
 - **Form Handling:** [React Hook Form](https://react-hook-form.com/)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/)
 - **Validation:** [Zod](https://zod.dev/)
+- **Notifications:** [Sonner](https://sonner.emilkowal.ski/)
+- **Icons:** [Lucide React](https://lucide.dev/)
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
 - Node.js 18+ installed
-- A [Supabase](https://supabase.com/) account for database
-- Generated project documents from [CodeGuide](https://codeguide.dev/) for best development experience
+- A [Supabase](https://supabase.com/) account for database and authentication
 
 ## Getting Started
 
-1. **Clone the repository**
+### 1. Clone and Install
 
-   ```bash
-   git clone <repository-url>
-   cd codeguide-vite-supabase
-   ```
+```bash
+git clone <repository-url>
+cd photo-share-community
+npm install
+```
 
-2. **Install dependencies**
+### 2. Set Up Supabase
 
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
+Follow the complete setup guide in [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) to:
 
-3. **Environment Variables Setup**
+1. Create a new Supabase project
+2. Configure authentication settings
+3. Run the database schema
+4. Set up storage bucket
+5. Get your API credentials
 
-   - Copy the `.env.example` file to `.env`:
-     ```bash
-     cp .env.example .env
-     ```
-   - Fill in the environment variables in `.env` (see Configuration section below)
+### 3. Configure Environment Variables
 
-4. **Start the development server**
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   ```
-
-5. **Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.**
-
-## Configuration
-
-### Supabase Setup
-
-1. Go to [Supabase Dashboard](https://app.supabase.com/)
-2. Create a new project
-3. Go to Project Settings > API
-4. Copy the `Project URL` as `VITE_SUPABASE_URL`
-5. Copy the `anon` public key as `VITE_SUPABASE_ANON_KEY`
-
-## Environment Variables
-
-Create a `.env` file in the root directory with the following variables:
+Create a `.env.local` file in the root directory:
 
 ```env
 # Supabase
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_SUPABASE_URL=your_project_url
+VITE_SUPABASE_ANON_KEY=your_anon_key
 ```
 
-## Features
+### 4. Start Development
 
-- 📦 Supabase Database Integration
-- 🎨 Modern UI with Tailwind CSS and Radix UI
-- 🚀 Fast Development with Vite
-- 🔄 Data Fetching with TanStack Query
-- 📱 Responsive Design
-- 🎭 Beautiful Animations with Framer Motion
-- 📝 Type-Safe Forms with React Hook Form and Zod
+```bash
+npm run dev
+```
 
-## Project Structure
+Open [http://localhost:5173](http://localhost:5173) to see the application.
+
+## Quick Demo
+
+1. **Sign up** for a new account
+2. **Upload your first photo** with title and description
+3. **Browse the gallery** to see community photos
+4. **View profiles** and explore user portfolios
+5. **Customize your profile** with display name and avatar
+
+## Application Structure
 
 ```
-codeguide-vite-supabase/
-├── src/                # Source files
-│   ├── components/    # React components
-│   ├── lib/          # Utility functions
-│   ├── hooks/        # Custom hooks
-│   └── types/        # TypeScript types
-├── public/            # Static assets
-└── documentation/     # Generated documentation from CodeGuide
+src/
+├── components/          # Reusable React components
+│   ├── ui/             # shadcn/ui components
+│   ├── Navbar.tsx      # Navigation bar
+│   ├── PhotoCard.tsx   # Photo display component
+│   ├── ProtectedRoute.tsx # Authenticated route wrapper
+│   └── PublicRoute.tsx # Public route wrapper
+├── contexts/           # React contexts
+│   └── AuthContext.tsx # Authentication state management
+├── hooks/              # Custom React hooks
+│   ├── usePhotos.ts    # Photo data fetching
+│   ├── useUploadPhoto.ts # Photo upload logic
+│   └── useUserProfile.ts # User profile management
+├── lib/               # Utility functions
+│   └── supabaseClient.ts # Supabase client configuration
+├── pages/             # Page components
+│   ├── HomePage.tsx   # Main photo feed
+│   ├── UploadPage.tsx # Photo upload interface
+│   ├── ProfilePage.tsx # User profile view
+│   ├── LoginPage.tsx  # User login
+│   └── SignupPage.tsx # User registration
+├── types/             # TypeScript type definitions
+│   └── database.ts    # Database schema types
 ```
+
+## Routes
+
+- `/` - Public landing page (unauthenticated) / Photo gallery (authenticated)
+- `/login` - User login
+- `/signup` - User registration
+- `/upload` - Photo upload (authenticated only)
+- `/profile/:userId` - User profile view (public)
+
+## Database Schema
+
+The application uses two main tables:
+
+### `profiles`
+- `id` (UUID, Primary Key)
+- `user_id` (UUID, Foreign Key to auth.users)
+- `display_name` (Text, Optional)
+- `avatar_url` (Text, Optional)
+- `created_at` (Timestamp)
+
+### `photos`
+- `id` (UUID, Primary Key)
+- `user_id` (UUID, Foreign Key to auth.users)
+- `image_url` (Text, Required)
+- `title` (Text, Optional)
+- `description` (Text, Optional)
+- `created_at` (Timestamp)
+
+## Security Features
+
+- **Row Level Security (RLS)** on all tables
+- **Authenticated uploads** - Only logged-in users can upload photos
+- **Public viewing** - Photos are publicly visible but only owners can modify
+- **Storage policies** - Secure file upload with user isolation
+- **Session management** - Secure authentication with automatic token refresh
 
 ## Available Scripts
 
